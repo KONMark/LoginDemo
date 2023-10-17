@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: user-center-app      # 微服务名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://175.178.170.246:8848 #配置Nacos注册中心地址（云服务器）
+      config:
+        server-addr: http://175.178.170.246:8848 #配置Nacos注册中心地址（云服务器）
+        file-extension: yaml #指定yaml格式的配置
+
+server:
+  port: 8200

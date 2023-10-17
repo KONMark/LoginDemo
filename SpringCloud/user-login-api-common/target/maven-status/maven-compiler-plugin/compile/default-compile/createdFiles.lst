@@ -1,0 +1,3 @@
+com\user\pojo\User.class
+com\user\service\UserClient.class
+com\user\pojo\PostInfo.class

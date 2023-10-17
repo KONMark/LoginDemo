@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: user-login-gateway       # 微服务名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://175.178.170.246:8848 #配置Nacos注册中心地址（云服务器）
+      config:
+        server-addr: http://175.178.170.246:8848 #配置Nacos注册中心地址（云服务器）
+        file-extension: yaml #指定yaml格式的配置
+    gateway:
+      locator:
+        enabled: true    #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:
+        - id: to_user_login #路由的ID，没有固定规则但要求唯一，建议配合服务名
+          uri: lb://auth-center-app        #匹配后提供服务的路由地址
+          predicates:
+            - Path=/login,/token         # 断言，路径相匹配的进行路由
+
+        - id: to_user_register #路由的ID，没有固定规则但要求唯一，建议配合服务名
+          uri: lb://user-center-app        #匹配后提供服务的路由地址
+          predicates:
+            - Path=/judgePassword,/register,/judgeusername        # 断言，路径相匹配的进行路由
+
+# ip:8000/user-login-app/login
+
+server:
+  port: 8050
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
